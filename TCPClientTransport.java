@@ -1,3 +1,5 @@
+
+import java.io.DataOutputStream;
 import java.net.*;
 import java.nio.ByteBuffer;
 
@@ -5,52 +7,37 @@ import java.nio.ByteBuffer;
  *
  * @author Blakeslee
  */
-public class ClientTransport {
+public class TCPClientTransport {    
     
-    private DatagramSocket clientSocket;
-    private InetAddress serverIPAddress;
-    private int serverPort;
+    
+    private Socket clientSocket;
     private final int MAX_PACKET_SIZE;
-    
-    public ClientTransport(String hostname, int port) throws Exception{
-        
-        clientSocket = new DatagramSocket();
-        serverIPAddress = InetAddress.getByName(hostname);
-        serverPort = port; 
-        MAX_PACKET_SIZE = 500;
-        
-    }
-    
-    public void sendBytes(byte[] bytes) throws Exception{
-        DatagramPacket sendPacket = new DatagramPacket(bytes,bytes.length,serverIPAddress,serverPort);
-        clientSocket.send(sendPacket);  
-       
-    }
-    
-    public void sendFileSize(int fileSize) throws Exception {
-    	sendBytes(ByteBuffer.allocate(4).putInt(fileSize).array());
-    }
-    
-        
-        
-    
-    
-    public int getPacketSize(){
-        
-        return MAX_PACKET_SIZE;        
-    }
-    
-    
+    DataOutputStream outToServer;
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public TCPClientTransport hostname, int port) throws Exception {
+
+        
+
+        clientSocket = new Socket(hostname, port);
+        MAX_PACKET_SIZE = 500;
+        outToServer = new DataOutputStream(clientSocket.getOutputStream());
+
+
+    }
+
+    public void sendBytes(byte[] bytes) throws Exception {
+       
+
+        outToServer.write(bytes);
+        
+    }
+
+    public void sendFileSize(int fileSize) throws Exception {
+        sendBytes(ByteBuffer.allocate(4).putInt(fileSize).array());
+    }
+
+    public int getPacketSize() {
+
+        return MAX_PACKET_SIZE;
+    }
 }
