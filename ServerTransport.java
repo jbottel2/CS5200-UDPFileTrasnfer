@@ -12,9 +12,9 @@ public class ServerTransport{
     byte [] receiveFileData;
     byte [] receiveFileSizeData;
     
-    ServerTransport() throws Exception{
+    ServerTransport(int port) throws Exception{
         
-        server = new DatagramSocket(15200);
+        server = new DatagramSocket(port);
         //www.stackoverflow.com forum helped out here
         receiveFileData = new byte[500];
         receiveFileSizeData = new byte[4];
