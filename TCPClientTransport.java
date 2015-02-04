@@ -14,9 +14,7 @@ public class TCPClientTransport {
     private final int MAX_PACKET_SIZE;
     DataOutputStream outToServer;
 
-    public TCPClientTransport hostname, int port) throws Exception {
-
-        
+    public TCPClientTransport(String hostname, int port) throws Exception {
 
         clientSocket = new Socket(hostname, port);
         MAX_PACKET_SIZE = 500;
