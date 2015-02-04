@@ -28,7 +28,7 @@ public class dl_client {
 				// Send the byte arrays equal to the max packet size.
 				ct.sendBytes(theFile.getBytes(amountToSend));
 				packetsSent++;
-				if (packetsSent==2) { Thread.sleep(1); packetsSent=0; }
+				if (packetsSent==10) { Thread.sleep(10); packetsSent=0; }
 			}
 
 			System.out.println("File transfer completed.");

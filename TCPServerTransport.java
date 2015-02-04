@@ -25,10 +25,10 @@ public class TCPServerTransport{
         
     }
     
-    byte [] recieveBytes(int amount) throws Exception{
+    byte [] recieveBytes() throws Exception{
         //www.stackoverflow.com helped out here
-    	byte[] theseBytes = new byte[amount];
-    	in.read(theseBytes, 0, amount);
+    	byte[] theseBytes = new byte[500];
+    	in.read(theseBytes, 0, 500);
     	return theseBytes;
     }
     
