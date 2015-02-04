@@ -4,6 +4,7 @@
 //Steve
 //Note: received help at www.stackoverflow.com;
 
+
 public class dl_server {
 
     public static void main(String[] args) {
@@ -15,17 +16,19 @@ public class dl_server {
         
         //amount of bytes copied
         int copied = 0;
+        int port = Integer.parseInt(args[0]);
+        System.out.println(port);
         long beforeSeconds = 0;
         long afterSeconds = 0;
-        byte [] bytesStorage;
+        byte [] bytesStorage = new byte [500];
         
         try{
-            receive_data = new ServerTransport();
+            receive_data = new ServerTransport(port);
             //The first message we recieve should be the number of packets in 
             //file.
+            
             while(true){
                 sizeOfFile = receive_data.receiveFileSize();
-                bytesStorage = new byte[500];
                 clientsFile = new FileClass("output.dat", 'w');
                 copied = 0;
                 
@@ -35,11 +38,9 @@ public class dl_server {
                     bytesStorage = receive_data.recieveBytes();
                     if(bytesStorage != null)
                     {
-                    	//if (bytesStorage.length()+copied > sizeOfFile) {
-                    	//	bytesCopy = 
-                    	//}
                         clientsFile.writeBytes(bytesStorage);
                         copied = clientsFile.getFileSize();
+                        System.out.println(copied);
                     }
                     else if(bytesStorage == null)
                     {
@@ -47,7 +48,7 @@ public class dl_server {
                     }
                 }
                 afterSeconds = System.currentTimeMillis();
-                System.out.println("size of File sent: " + sizeOfFile + " size of File copied" + copied);
+                System.out.println("size of File sent: " + sizeOfFile + " size of File copied: " + copied);
                 System.out.println("File Copied(kbps): " + (copied)/(afterSeconds - beforeSeconds));
                 
                 //close file before repeat
