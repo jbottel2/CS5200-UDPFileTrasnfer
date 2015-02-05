@@ -37,11 +37,11 @@ public class dl_server {
 		byte [] bytesStorage = new byte [500];
 
 		try{
-			receive_data = new ServerTransport(port);
 			//The first message we receive should be the number of packets in 
 			//file.
 
 			while(true){
+				receive_data = new ServerTransport(port);
 				sizeOfFile = receive_data.receiveFileSize();
 				if (DEBUG) System.out.println("Received file size: " + sizeOfFile + " bytes.");
 				clientsFile = new FileClass("output.dat", 'w');
@@ -74,6 +74,7 @@ public class dl_server {
 
 				//close file before repeat
 				clientsFile.closeFile();
+				receive_data.closeConnection();
 
 			}
 		}
@@ -82,6 +83,7 @@ public class dl_server {
 		}
 		catch(Exception e){
 			System.out.println("Error: " + e);
+			if (DEBUG) e.printStackTrace();
 		}
 
 	}

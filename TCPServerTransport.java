@@ -1,11 +1,13 @@
 //CS 5200 ServerTransport
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 import java.nio.ByteBuffer;
 
 public class TCPServerTransport {
 
+	public static final boolean DEBUG=true;
     int numberOfBytes;
     ServerSocket server;
     Socket socket;
@@ -16,7 +18,7 @@ public class TCPServerTransport {
     TCPServerTransport(int port) throws Exception{
         
         server = new ServerSocket(port);
-        Socket socket = server.accept();
+        socket = server.accept();
         in = socket.getInputStream();
         //www.stackoverflow.com forum helped out here
         receiveFileData = new byte[500];
@@ -39,8 +41,12 @@ public class TCPServerTransport {
     	byte[] fileSize = new byte[4];
         in.read(fileSize,0,4);
         numberOfBytes = ByteBuffer.wrap(fileSize).getInt();
-
         return numberOfBytes;
+    }
+    
+    void closeConnection() throws IOException {
+    	socket.close();
+    	server.close();
     }
      
 }

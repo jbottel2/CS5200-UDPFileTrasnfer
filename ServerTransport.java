@@ -1,10 +1,12 @@
 //CS 5200 ServerTransport
 
+import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
 
 public class ServerTransport{
 
+    public static final boolean DEBUG=true;
     int numberOfBytes;
     DatagramSocket server;
     DatagramPacket received;
@@ -36,6 +38,10 @@ public class ServerTransport{
         server.setSoTimeout(2500);
         numberOfBytes = ByteBuffer.wrap(fileSize.getData()).getInt();
         return numberOfBytes;
+    }
+
+    void closeConnection() throws IOException {
+	    server.close();
     }
      
 }

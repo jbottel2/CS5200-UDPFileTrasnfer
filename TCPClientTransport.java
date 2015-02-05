@@ -24,10 +24,7 @@ public class TCPClientTransport {
     }
 
     public void sendBytes(byte[] bytes) throws Exception {
-       
-
         outToServer.write(bytes);
-        
     }
 
     public void sendFileSize(int fileSize) throws Exception {
@@ -35,7 +32,6 @@ public class TCPClientTransport {
     }
 
     public int getPacketSize() {
-
         return MAX_PACKET_SIZE;
     }
 }
