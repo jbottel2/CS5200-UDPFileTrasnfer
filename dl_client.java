@@ -1,13 +1,23 @@
 
 public class dl_client {
 
-	public static void main(String[] args) {
-		// String arguments are taken from the command line, where dl_client is run as:
-		// dl_client hostname port filename
+	public static final boolean DEBUG = true;
 
-		String hostname = args[0];
-		int port = Integer.parseInt(args[1]);
-		String filename = args[2];
+	public static void main(String[] args) {
+
+		String hostname = null;
+		int port = 0;
+		String filename = null;
+
+		try {
+			hostname = args[0];
+			port = Integer.parseInt(args[1]);
+			filename = args[2];
+		}
+		catch (Exception e) {
+			if (DEBUG) e.printStackTrace();
+			printUsage();
+		}
 
 		// Create a client transport layer.
 		try {
@@ -20,7 +30,6 @@ public class dl_client {
 
 			// The amount of bytes we will send at a time is the
 			// amount that ClientTransport tells us is the max packet size.
-
 			int amountToSend = ct.getPacketSize();
 
 			int packetsSent = 0;
@@ -28,23 +37,25 @@ public class dl_client {
 				// Send the byte arrays equal to the max packet size.
 				ct.sendBytes(theFile.getBytes(amountToSend));
 				packetsSent++;
-				if (packetsSent==10) { Thread.sleep(10); packetsSent=0; }
+				// Slow the flow of packets to prevent full buffers.
+				if (packetsSent==10) { Thread.sleep(5); packetsSent=0; }
 			}
 
+			if (DEBUG) System.out.println("");
 			System.out.println("File transfer completed.");
 			theFile.closeFile();
 
 
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			if (DEBUG) e.printStackTrace();
+			else System.out.println("An error occured.");
 		}
-
-
-
-
-
-
 	}
 
+	public static void printUsage() {
+		System.out.println("Usage:");
+		System.out.println("dl_client hostname port filename");
+		System.exit(0);
+	}
 }

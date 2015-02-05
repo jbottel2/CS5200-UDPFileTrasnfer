@@ -6,18 +6,17 @@ import java.nio.ByteBuffer;
  * @author Blakeslee
  */
 public class ClientTransport {
-    
+
     private DatagramSocket clientSocket;
     private InetAddress serverIPAddress;
     private int serverPort;
-    private final int MAX_PACKET_SIZE;
+    private final int MAX_PACKET_SIZE = 500;
     
     public ClientTransport(String hostname, int port) throws Exception{
         
         clientSocket = new DatagramSocket();
         serverIPAddress = InetAddress.getByName(hostname);
         serverPort = port; 
-        MAX_PACKET_SIZE = 500;
         
     }
     
@@ -30,27 +29,9 @@ public class ClientTransport {
     public void sendFileSize(int fileSize) throws Exception {
     	sendBytes(ByteBuffer.allocate(4).putInt(fileSize).array());
     }
-    
-        
-        
-    
-    
+
     public int getPacketSize(){
-        
         return MAX_PACKET_SIZE;        
     }
     
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+   }

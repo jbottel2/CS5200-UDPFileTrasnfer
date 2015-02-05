@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class FileClass {
 	
+	public static final boolean DEBUG = true;
 	File currentFile;
 	char mode;
 	FileInputStream inputStream;
@@ -16,16 +17,18 @@ public class FileClass {
 
 	FileClass(String filename, char mode) throws IOException	{
 		currentFile = new File(filename);
-		currentFile.createNewFile();
 		this.mode = mode;
 		if (this.mode=='w') {
+            currentFile.createNewFile();
+            if (DEBUG) System.out.println("Opened file for writing.");
 			outputStream = new FileOutputStream(currentFile);
 			fileSize = (int) currentFile.length();
 		}
 		else if (this.mode=='r') {
 			inputStream = new FileInputStream(currentFile);
 			fileSize = (int) currentFile.length();
-			System.out.println("filesize:"+ fileSize);
+			if (DEBUG) System.out.println("Opened file for reading.");
+			if (DEBUG) System.out.println("The file size is " + fileSize + " bytes.");
 			byteLocation = 0;
 		}
 	}
@@ -44,7 +47,7 @@ public class FileClass {
 			length = fileSize-byteLocation;
 		}
 		byte[] theseBytes = new byte[length];
-		System.out.println("At location:"+ byteLocation + ", sending " + length + " bytes.");
+		if (DEBUG) System.out.print("Current Location: "+ byteLocation + ". Reading " + length + " bytes. \r");
 		inputStream.read(theseBytes, 0, length);
 		byteLocation += length;
 		return theseBytes;
@@ -59,7 +62,4 @@ public class FileClass {
 		if (mode=='w') outputStream.close();
 		if (mode=='r') inputStream.close();
 	}
-	
-	
-	
 }

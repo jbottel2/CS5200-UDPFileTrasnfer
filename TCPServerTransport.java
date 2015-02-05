@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.net.*;
 import java.nio.ByteBuffer;
 
-public class TCPServerTransport{
+public class TCPServerTransport {
 
     int numberOfBytes;
     ServerSocket server;
