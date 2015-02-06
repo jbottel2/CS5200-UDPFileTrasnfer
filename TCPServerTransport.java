@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class TCPServerTransport {
 
@@ -30,7 +31,8 @@ public class TCPServerTransport {
     byte [] recieveBytes() throws Exception{
         //www.stackoverflow.com helped out here
     	byte[] theseBytes = new byte[500];
-    	in.read(theseBytes, 0, 500);
+    	int receivedNum = in.read(theseBytes, 0, 500);
+    	if (receivedNum<500) theseBytes = Arrays.copyOf(theseBytes,receivedNum);
     	return theseBytes;
     }
     
