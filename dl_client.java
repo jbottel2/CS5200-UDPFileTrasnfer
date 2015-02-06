@@ -38,7 +38,7 @@ public class dl_client {
 				ct.sendBytes(theFile.getBytes(amountToSend));
 				packetsSent++;
 				// Slow the flow of packets to prevent full buffers.
-				if (packetsSent==10) { Thread.sleep(5); packetsSent=0; }
+				if (packetsSent==10) { Thread.sleep(10); packetsSent=0; }
 			}
 
 			if (DEBUG) System.out.println("");

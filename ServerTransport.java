@@ -1,3 +1,4 @@
+package dl_server_2;
 //CS 5200 ServerTransport
 
 import java.io.IOException;
@@ -26,16 +27,26 @@ public class ServerTransport{
     }
     
     byte [] recieveBytes() throws Exception{
+        
         //www.stackoverflow.com helped out here
-        server.receive(received);
+        server.setSoTimeout(2500);
+        try{
+            server.receive(received);
+        }
+        catch(SocketTimeoutException E)
+        {
+            return null;
+        }
+        
         return received.getData();
+        
     }
     
     //help from stackoverflow.com forum
     int receiveFileSize() throws Exception{
         //get fileSize from client
-        server.receive(fileSize);
-        server.setSoTimeout(2500);
+        server.setSoTimeout(0);
+        server.receive(fileSize);  
         numberOfBytes = ByteBuffer.wrap(fileSize.getData()).getInt();
         return numberOfBytes;
     }
