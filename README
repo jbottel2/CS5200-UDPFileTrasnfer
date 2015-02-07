@@ -1,0 +1,39 @@
+UDP File Transfer Warm-up Project
+CS 5200 - Spring 2015
+
+Jacob Bottelberghe - j.bottelberghe@gmail.com
+Stephen Blakeslee - stephen.blakeslee@aggiemail.usu.edu
+Trevor Carter - tcarter690@gmail.com
+
+HOW TO COMPILE
+-------------------------
+Compile all of the sources:
+javac *.java
+
+
+HOW TO RUN
+-------------------------
+The code is initially set up to perform a file transfer using UDP Protocol.
+
+SERVER
+---------------
+Run a server with:
+java dl_server port_number
+
+The server will receive files continually until terminated. It will rewrite
+the output.dat file each time a new file is received.
+
+CLIENT
+--------------
+Run a client with:
+java dl_client hostname port_number file_name
+
+
+TCP
+-------------
+If you wish to perform a file transfer using TCP Protocol,
+modify the code in "dl_client" so that instead of an instance
+of ClientTransport being created, it should be a TCPClientTransport
+instance. The same process should be done for the server. Recompile
+and then run.
+

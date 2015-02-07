@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
 
 public class ServerTransport{
 
-    public static final boolean DEBUG=true;
+    public static final boolean DEBUG=false;
     int numberOfBytes;
     DatagramSocket server;
     DatagramPacket received;

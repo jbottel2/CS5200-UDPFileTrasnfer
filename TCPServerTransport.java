@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class TCPServerTransport {
 
-	public static final boolean DEBUG=true;
+	public static final boolean DEBUG=false;
     int numberOfBytes;
     ServerSocket server;
     Socket socket;

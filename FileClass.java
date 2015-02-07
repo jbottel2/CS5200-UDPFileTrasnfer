@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class FileClass {
 	
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	File currentFile;
 	char mode;
 	FileInputStream inputStream;
