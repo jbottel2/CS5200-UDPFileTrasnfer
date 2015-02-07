@@ -1,11 +1,15 @@
+/* *****************
+UDP File Transfer Warm-up Project
+CS 5200 - Spring 2015
+
+Jacob Bottelberghe - j.bottelberghe@gmail.com
+Stephen Blakeslee - stephen.blakeslee@aggiemail.usu.edu
+Trevor Carter - tcarter690@gmail.com
+
+*/
+
 import java.net.SocketTimeoutException;
 import java.util.Arrays;
-
-//CS 5200 dl_server
-//Trevor Carter
-//Jacob 
-//Steve
-//Note: received help at www.stackoverflow.com;
 
 
 public class dl_server {

@@ -1,4 +1,12 @@
+/* *****************
+UDP File Transfer Warm-up Project
+CS 5200 - Spring 2015
 
+Jacob Bottelberghe - j.bottelberghe@gmail.com
+Stephen Blakeslee - stephen.blakeslee@aggiemail.usu.edu
+Trevor Carter - tcarter690@gmail.com
+
+*/
 public class dl_client {
 
 	public static final boolean DEBUG = true;
