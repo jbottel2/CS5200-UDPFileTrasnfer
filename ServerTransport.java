@@ -24,7 +24,6 @@ public class ServerTransport{
     byte [] receiveFileSizeData;
     
     ServerTransport(int port) throws Exception{
-        
         server = new DatagramSocket(port);
         //www.stackoverflow.com forum helped out here
         receiveFileData = new byte[500];
@@ -33,7 +32,6 @@ public class ServerTransport{
         fileSize = new DatagramPacket(receiveFileSizeData, receiveFileSizeData.length);
         numberOfBytes =0;
     }
-    
     byte [] recieveBytes() throws Exception{
         
         //www.stackoverflow.com helped out here
@@ -45,9 +43,7 @@ public class ServerTransport{
         {
             return null;
         }
-        
         return received.getData();
-        
     }
     
     //help from stackoverflow.com forum
@@ -62,5 +58,4 @@ public class ServerTransport{
     void closeConnection() throws IOException {
 	    server.close();
     }
-     
 }
